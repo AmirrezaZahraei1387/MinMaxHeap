@@ -10,6 +10,7 @@ void MinMaxHeap<Comparable>::insert(const Comparable &item) {
     expand();
     mmHeap[currentSize + 1] = item;
     percolateUp(++currentSize);
+    reduce();
 }
 
 template<typename Comparable>
@@ -32,7 +33,6 @@ std::ostream& operator<<(std::ostream &outStream, MinMaxHeap<T> &h) {
 template<typename Comparable>
 void MinMaxHeap<Comparable>::makeEmpty() {
     mmHeap.clear();
-    mmHeap.resize(1);
     currentSize = 0;
 }
 
@@ -57,10 +57,19 @@ const Comparable &MinMaxHeap<Comparable>::getMax() const {
         case 1:
             return mmHeap[ROOT_IND];
         case 2:
-            return mmHeap[leftChild(ROOT_IND)];
+            return mmHeap[left(ROOT_IND)];
         default:
-            return mmHeap[leftChild(ROOT_IND)] > mmHeap[rightChild(ROOT_IND)] ?
-            mmHeap[leftChild(ROOT_IND)] : mmHeap[rightChild(ROOT_IND)];
+            return mmHeap[left(ROOT_IND)] > mmHeap[right(ROOT_IND)] ?
+                   mmHeap[left(ROOT_IND)] : mmHeap[right(ROOT_IND)];
     }
 }
+
+template<typename Comparable>
+MinMaxHeap<Comparable>::MinMaxHeap(std::initializer_list<Comparable> init_list)
+: mmHeap(init_list), currentSize(init_list.size() - 1)
+{
+    expand();
+    buildHeap();
+}
+
 #endif //MINMAXHEAP_MINMAXHEAPTE_INL

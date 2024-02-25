@@ -46,7 +46,7 @@ private:
     int currentSize{0};
     std::vector<Comparable> mmHeap;
 
-    int getHeight(int hole) const;
+    static int getHeight(int hole);
 
     // percolating an element from bottom to top
     // to find its correct position
@@ -64,9 +64,15 @@ private:
     void expand();
     void reduce();
 
-    int leftChild(int hole) const;
-    int rightChild(int hole) const;
-    int getParent(int hole) const;
+    bool hasChild(int hole) const;
+    bool isGCoI(int hole, int i) const;
+
+    int minGCoC(int hole) const;
+    int maxGCoC(int hole) const;
+
+    static int left(int hole);
+    static int right(int hole);
+    static int parent(int hole);
 };
 
 #include "MinMaxHeapCore.inl"
