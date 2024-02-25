@@ -64,6 +64,9 @@ private:
     void expand();
     void reduce();
 
+    int leftChild(int hole) const;
+    int rightChild(int hole) const;
+    int getParent(int hole) const;
 };
 
 #include "MinMaxHeapCore.inl"

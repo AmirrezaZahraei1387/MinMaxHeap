@@ -57,10 +57,10 @@ const Comparable &MinMaxHeap<Comparable>::getMax() const {
         case 1:
             return mmHeap[ROOT_IND];
         case 2:
-            return mmHeap[ROOT_IND*2];
+            return mmHeap[leftChild(ROOT_IND)];
         default:
-            return mmHeap[ROOT_IND*2] > mmHeap[ROOT_IND*2+1] ? mmHeap[ROOT_IND * 2] : mmHeap[ROOT_IND * 2 + 1];
+            return mmHeap[leftChild(ROOT_IND)] > mmHeap[rightChild(ROOT_IND)] ?
+            mmHeap[leftChild(ROOT_IND)] : mmHeap[rightChild(ROOT_IND)];
     }
 }
-
 #endif //MINMAXHEAP_MINMAXHEAPTE_INL

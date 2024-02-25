@@ -26,20 +26,20 @@ void MinMaxHeap<Comparable>::percolateUp(int hole) {
 
         // we are in an odd node
         if(height % 2 == 1){
-            if(mmHeap[TEMP_IND] < mmHeap[hole/2])
-                mmHeap[hole] = std::move(mmHeap[hole/2]);
-            else if(mmHeap[TEMP_IND] > mmHeap[hole/4])
-                mmHeap[hole] = std::move(mmHeap[hole/4]);
+            if(mmHeap[TEMP_IND] < mmHeap[getParent(hole)])
+                mmHeap[hole] = std::move(mmHeap[getParent(hole)]);
+            else if(mmHeap[TEMP_IND] > mmHeap[getParent(getParent(hole))])
+                mmHeap[hole] = std::move(mmHeap[getParent(getParent(hole))]);
             else{
                 mmHeap[hole] = std::move(mmHeap[TEMP_IND]);
                 break;
         }
         // we are in an even node
         }else if(height % 2 == 0){
-            if(mmHeap[TEMP_IND] > mmHeap[hole/2])
-                mmHeap[hole] = std::move(mmHeap[hole/2]);
-            else if(mmHeap[TEMP_IND] < mmHeap[hole/4])
-                mmHeap[hole] = std::move(mmHeap[hole/4]);
+            if(mmHeap[TEMP_IND] > mmHeap[getParent(hole)])
+                mmHeap[hole] = std::move(mmHeap[getParent(hole)]);
+            else if(mmHeap[TEMP_IND] < mmHeap[getParent(getParent(hole))])
+                mmHeap[hole] = std::move(mmHeap[getParent(getParent(hole))]);
             else{
                 mmHeap[hole] = std::move(mmHeap[TEMP_IND]);
                 break;
@@ -76,8 +76,24 @@ std::ostream& MinMaxHeap<Comparable>::printAsTree(int hole, std::ostream &outStr
         outStream<<"  ";
     outStream<<mmHeap[hole]<<std::endl;
 
-    printAsTree(hole*2, outStream);
-    return printAsTree(hole*2 + 1, outStream);
+    printAsTree(leftChild(hole), outStream);
+    return printAsTree(rightChild(hole), outStream);
+}
+
+
+template<typename Comparable>
+int MinMaxHeap<Comparable>::leftChild(int hole) const {
+    return 2*hole;
+}
+
+template<typename Comparable>
+int MinMaxHeap<Comparable>::rightChild(int hole) const {
+    return 2*hole + 1;
+}
+
+template<typename Comparable>
+int MinMaxHeap<Comparable>::getParent(int hole) const {
+    return hole/2;
 }
 
 #endif //MINMAXHEAP_MINMAXHEAPCORE_INL
