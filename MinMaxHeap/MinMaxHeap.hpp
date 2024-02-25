@@ -35,7 +35,7 @@ public:
     int size() const;
 
     template<typename T>
-    friend void operator << (std::ostream& outStream, MinMaxHeap<T>& h);
+    friend std::ostream& operator << (std::ostream& outStream, MinMaxHeap<T>& h);
 
 private:
     static constexpr int ROOT_IND{1}; // index of the root
@@ -43,9 +43,10 @@ private:
     // it is used for keeping the element to avoid unnecessary swaps
     static constexpr int DEFAULT_SIZE{10};
 
-
-    int HeapSize;
+    int currentSize{0};
     std::vector<Comparable> mmHeap;
+
+    int getHeight(int hole) const;
 
     // percolating an element from bottom to top
     // to find its correct position
@@ -56,14 +57,16 @@ private:
     void percolateDown(int hole);
 
     void buildHeap();
-    void printAsTree(std::ostream& outStream) const;
+    std::ostream& printAsTree(int hole, std::ostream& outStream) const;
 
     // resizing the vector when we need more space, or
     // we do not need some space.
     void expand();
     void reduce();
 
-
 };
+
+#include "MinMaxHeapCore.inl"
+#include "MinMaxHeapTe.inl"
 
 #endif //MINMAXHEAP_MINMAXHEAP_HPP
