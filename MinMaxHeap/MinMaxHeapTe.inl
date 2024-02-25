@@ -96,6 +96,23 @@ void MinMaxHeap<Comparable>::deleteMin(Comparable &item) {
 
 
 template<typename Comparable>
+void MinMaxHeap<Comparable>::deleteMax() {
+    getMaxElement() = std::move(mmHeap[currentSize]);
+    --currentSize;
+    percolateDown(ROOT_IND);
+}
+
+
+template<typename Comparable>
+void MinMaxHeap<Comparable>::deleteMax(Comparable &item) {
+    item = getMaxElement();
+    getMaxElement() = std::move(mmHeap[currentSize]);
+    --currentSize;
+    percolateDown(ROOT_IND);
+}
+
+
+template<typename Comparable>
 Comparable &MinMaxHeap<Comparable>::getMinElement() {
     return mmHeap[ROOT_IND];
 }
