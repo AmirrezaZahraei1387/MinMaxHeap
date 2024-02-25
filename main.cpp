@@ -8,7 +8,9 @@ int main() {
 
     MinMaxHeap<int> x(y.begin(), y.end());
 
-    std::cout<<x.getMin();
+    MinMaxHeap<int> b(MinMaxHeap<int>(y.begin(), y.end()));
+
+    std::cout<<b.getMin();
 
     return 0;
 }

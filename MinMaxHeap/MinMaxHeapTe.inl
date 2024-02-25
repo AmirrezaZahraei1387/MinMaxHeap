@@ -160,4 +160,36 @@ const Comparable &MinMaxHeap<Comparable>::getMaxElement() const {
 }
 
 
+template<typename Comparable>
+MinMaxHeap<Comparable>::MinMaxHeap(const MinMaxHeap &other) {
+    mmHeap = other.mmHeap;
+    currentSize = other.size();
+}
+
+template<typename Comparable>
+MinMaxHeap<Comparable>::MinMaxHeap(MinMaxHeap &&other) noexcept{
+    mmHeap = std::move(other.mmHeap);
+    currentSize = other.size();
+    other.makeEmpty();
+}
+
+template<typename Comparable>
+MinMaxHeap<Comparable>& MinMaxHeap<Comparable>::operator=(const MinMaxHeap &other) {
+    if(&other != this) {
+        mmHeap = other.mmHeap;
+        currentSize = other.size();
+    }
+    return *this;
+}
+
+template<typename Comparable>
+MinMaxHeap<Comparable>& MinMaxHeap<Comparable>::operator=(MinMaxHeap &&other) noexcept {
+    if(&other != this) {
+        mmHeap = std::move(other.mmHeap);
+        currentSize = other.size();
+        other.makeEmpty();
+    }
+    return *this;
+}
+
 #endif //MINMAXHEAP_MINMAXHEAPTE_INL

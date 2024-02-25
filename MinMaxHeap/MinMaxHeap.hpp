@@ -19,6 +19,12 @@ public:
     template<typename Iterator>
     MinMaxHeap(Iterator begin, Iterator end);
 
+    MinMaxHeap(const MinMaxHeap& other);
+    MinMaxHeap(MinMaxHeap&& other) noexcept;
+
+    MinMaxHeap& operator=(const MinMaxHeap& other);
+    MinMaxHeap& operator=(MinMaxHeap&& other) noexcept;
+
     void insert(const Comparable& item);
     void insert(Comparable&& item);
 
