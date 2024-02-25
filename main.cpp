@@ -3,14 +3,12 @@
 
 int main() {
 
-    std::vector<int> y{5, 4, 3, 2, 2, 5, 6};;
+    std::vector<int> y{81, 6, 8, 31, 17, 12, 28, 16, 25, 19,
+                       20, 52, 87, 14, 42, 31, 59, 71, 24, 79, 63, 80, 19, 32, 15, 13, 48};
 
     MinMaxHeap<int> x(y.begin(), y.end());
 
-    std::cout<<x<<std::endl;
-    x.deleteMax();
-    x.deleteMax();
-    x.deleteMax();
-    std::cout<<x<<std::endl;
+    std::cout<<x.getMin();
+
     return 0;
 }

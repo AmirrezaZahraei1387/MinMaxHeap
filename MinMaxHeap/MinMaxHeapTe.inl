@@ -13,6 +13,7 @@ void MinMaxHeap<Comparable>::insert(const Comparable &item) {
     reduce();
 }
 
+
 template<typename Comparable>
 void MinMaxHeap<Comparable>::insert(Comparable&& item) {
     expand();
@@ -20,15 +21,18 @@ void MinMaxHeap<Comparable>::insert(Comparable&& item) {
     percolateUp(++currentSize);
 }
 
+
 template<typename Comparable>
 MinMaxHeap<Comparable>::MinMaxHeap()
 : mmHeap(DEFAULT_SIZE + 1)
 {}
 
+
 template<typename T>
 std::ostream& operator<<(std::ostream &outStream, MinMaxHeap<T> &h) {
     return h.printAsTree(MinMaxHeap<T>::ROOT_IND, outStream);
 }
+
 
 template<typename Comparable>
 void MinMaxHeap<Comparable>::makeEmpty() {
@@ -36,32 +40,37 @@ void MinMaxHeap<Comparable>::makeEmpty() {
     currentSize = 0;
 }
 
+
 template<typename Comparable>
 bool MinMaxHeap<Comparable>::empty() const {
     return currentSize == 0;
 }
+
 
 template<typename Comparable>
 int MinMaxHeap<Comparable>::size() const {
     return currentSize;
 }
 
+
 template<typename Comparable>
 const Comparable &MinMaxHeap<Comparable>::getMin() const {
     return getMinElement();
 }
+
 
 template<typename Comparable>
 const Comparable &MinMaxHeap<Comparable>::getMax() const {
     return getMaxElement();
 }
 
+
 template<typename Comparable>
 MinMaxHeap<Comparable>::MinMaxHeap(std::initializer_list<Comparable> init_list)
 : mmHeap(init_list), currentSize(init_list.size() - 1)
 {
-    expand();
     buildHeap();
+    expand();
 }
 
 template<typename Comparable>
@@ -69,15 +78,14 @@ template<typename Iterator>
 MinMaxHeap<Comparable>::MinMaxHeap(Iterator begin, Iterator end)
 : mmHeap(end - begin + 1), currentSize(end - begin)
 {
-    expand();
-    int i{1};
-    for(auto element{begin}; element < end; ++element, ++i){
-        std::cout<<i<<' '<<mmHeap.size()<<std::endl;
-        mmHeap[i] = *element;
-    }
 
+    int i{1};
+    for(auto element{begin}; element < end; ++element, ++i)
+        mmHeap[i] = *element;
     buildHeap();
+    expand();
 }
+
 
 template<typename Comparable>
 void MinMaxHeap<Comparable>::deleteMin() {
@@ -131,10 +139,12 @@ Comparable &MinMaxHeap<Comparable>::getMaxElement() {
     }
 }
 
+
 template<typename Comparable>
 const Comparable &MinMaxHeap<Comparable>::getMinElement() const {
     return mmHeap[ROOT_IND];
 }
+
 
 template<typename Comparable>
 const Comparable &MinMaxHeap<Comparable>::getMaxElement() const {

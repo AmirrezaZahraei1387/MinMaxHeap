@@ -10,6 +10,7 @@
 
 template <typename Comparable>
 class MinMaxHeap{
+
 public:
 
     MinMaxHeap();
@@ -38,6 +39,7 @@ public:
     friend std::ostream& operator << (std::ostream& outStream, MinMaxHeap<T>& h);
 
 private:
+
     static constexpr int ROOT_IND{1}; // index of the root
     static constexpr int TEMP_IND{0}; // the first index of the heap.
     // it is used for keeping the element to avoid unnecessary swaps
@@ -73,12 +75,14 @@ private:
     Comparable& getMinElement();
     Comparable& getMaxElement();
 
+    // internal methods to get a constant reference to the min/max element
     const Comparable& getMinElement() const;
     const Comparable& getMaxElement() const;
 
     static int left(int hole);
     static int right(int hole);
     static int parent(int hole);
+
 };
 
 #include "MinMaxHeapCore.inl"
