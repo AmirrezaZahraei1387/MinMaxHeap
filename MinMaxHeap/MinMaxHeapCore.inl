@@ -79,8 +79,10 @@ void MinMaxHeap<Comparable>::percolateDown(int hole) {
                 if(isGCoI(temp, hole)) {
                     if (mmHeap[TEMP_IND] > mmHeap[parent(temp)])
                         mmHeap[temp] = std::move(mmHeap[parent(temp)]);
-                }else
+                }else {
+                    hole = temp;
                     break;
+                }
             }else
                 break;
             hole = parent(temp);
@@ -92,8 +94,10 @@ void MinMaxHeap<Comparable>::percolateDown(int hole) {
                 if(isGCoI(temp, hole)) {
                     if (mmHeap[TEMP_IND] < mmHeap[parent(temp)])
                         mmHeap[temp] = std::move(mmHeap[parent(temp)]);
-                }else
+                }else {
+                    hole = temp;
                     break;
+                }
             }else
                 break;
             hole = parent(temp);
@@ -101,7 +105,6 @@ void MinMaxHeap<Comparable>::percolateDown(int hole) {
 
 
     }
-
     mmHeap[hole] = std::move(mmHeap[TEMP_IND]);
 }
 

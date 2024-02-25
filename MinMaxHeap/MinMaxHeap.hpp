@@ -70,6 +70,12 @@ private:
     int minGCoC(int hole) const;
     int maxGCoC(int hole) const;
 
+    Comparable& getMinElement();
+    Comparable& getMaxElement();
+
+    const Comparable& getMinElement() const;
+    const Comparable& getMaxElement() const;
+
     static int left(int hole);
     static int right(int hole);
     static int parent(int hole);
