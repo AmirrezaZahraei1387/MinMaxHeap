@@ -286,7 +286,6 @@ bool MinMaxHeap<Comparable>::isGCoI(int hole, int i) const{
 
 template<typename Comparable>
 int MinMaxHeap<Comparable>::findElement(const Comparable& element) const{
-
 }
 
 

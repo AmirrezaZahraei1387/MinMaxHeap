@@ -8,9 +8,9 @@ int main() {
 
 
     MinMaxHeap<int> b(MinMaxHeap<int>(y.begin(), y.end()));
-    b.setPrintType(MinMaxHeap<int>::AS_ARRAY);
+    b.setPrintType(MinMaxHeap<int>::AS_TREE);
     std::cout<<b<<std::endl;
-    std::cout<<b.findElement(6);
+    std::cout<<b.findElement(81);
 
     return 0;
 }
