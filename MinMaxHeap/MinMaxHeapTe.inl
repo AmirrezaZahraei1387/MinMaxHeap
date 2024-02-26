@@ -30,7 +30,14 @@ MinMaxHeap<Comparable>::MinMaxHeap()
 
 template<typename T>
 std::ostream& operator<<(std::ostream &outStream, MinMaxHeap<T> &h) {
-    return h.printAsTree(MinMaxHeap<T>::ROOT_IND, outStream);
+    switch (h.currentPt) {
+        case MinMaxHeap<T>::AS_TREE:
+            return h.printAsTree(MinMaxHeap<T>::ROOT_IND, outStream);
+        case MinMaxHeap<T>::AS_ARRAY:
+            return h.printAsArray(outStream);
+        default: // disabled
+            return outStream;
+    }
 }
 
 
@@ -190,6 +197,11 @@ MinMaxHeap<Comparable>& MinMaxHeap<Comparable>::operator=(MinMaxHeap &&other) no
         other.makeEmpty();
     }
     return *this;
+}
+
+template<typename Comparable>
+void MinMaxHeap<Comparable>::setPrintType(MinMaxHeap::PrintType pt){
+    currentPt = pt;
 }
 
 #endif //MINMAXHEAP_MINMAXHEAPTE_INL

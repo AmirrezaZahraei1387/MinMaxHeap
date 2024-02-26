@@ -13,6 +13,12 @@ class MinMaxHeap{
 
 public:
 
+    enum PrintType{
+        AS_ARRAY,
+        AS_TREE,
+        DISABLED,
+    };
+
     MinMaxHeap();
     MinMaxHeap(std::initializer_list<Comparable> init_list);
 
@@ -28,6 +34,8 @@ public:
     void insert(const Comparable& item);
     void insert(Comparable&& item);
 
+    void setPrintType(PrintType pt);
+
     void deleteMin();
     void deleteMin(Comparable& item);
 
@@ -36,6 +44,8 @@ public:
 
     const Comparable& getMax() const;
     const Comparable& getMin() const;
+
+    int findElement(const Comparable& element) const;
 
     void makeEmpty();
     bool empty() const;
@@ -51,6 +61,7 @@ private:
     // it is used for keeping the element to avoid unnecessary swaps
     static constexpr int DEFAULT_SIZE{10};
 
+    PrintType currentPt{AS_TREE};
     int currentSize{0};
     std::vector<Comparable> mmHeap;
 
@@ -60,12 +71,15 @@ private:
     // to find its correct position
     void percolateUp(int hole);
 
+    //int findElement(const Comparable& element) const;
+
     // percolating an element from top to bottom
     // to find its correct position
     void percolateDown(int hole);
 
     void buildHeap();
     std::ostream& printAsTree(int hole, std::ostream& outStream) const;
+    std::ostream& printAsArray(std::ostream& outStream) const;
 
     // resizing the vector when we need more space, or
     // we do not need some space.

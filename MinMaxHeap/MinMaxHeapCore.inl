@@ -282,4 +282,19 @@ bool MinMaxHeap<Comparable>::isGCoI(int hole, int i) const{
 
     return false;
 }
+
+
+template<typename Comparable>
+int MinMaxHeap<Comparable>::findElement(const Comparable& element) const{
+
+}
+
+
+template<typename Comparable>
+std::ostream &MinMaxHeap<Comparable>::printAsArray(std::ostream &outStream) const {
+    for(int i{1}; i <= currentSize; ++i)
+        outStream<<mmHeap[i]<<' ';
+    outStream<<std::endl;
+    return outStream;
+}
 #endif //MINMAXHEAP_MINMAXHEAPCORE_INL
