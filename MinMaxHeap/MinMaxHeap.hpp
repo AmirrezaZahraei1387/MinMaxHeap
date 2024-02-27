@@ -3,6 +3,9 @@
 //
 #ifndef MINMAXHEAP_MINMAXHEAP_HPP
 #define MINMAXHEAP_MINMAXHEAP_HPP
+
+#define REDUCE_MINMAX_HEAP_SIZE
+
 #include <ostream>
 #include <initializer_list>
 #include <vector>
@@ -42,10 +45,8 @@ public:
     void deleteMax();
     void deleteMax(Comparable& item);
 
-    const Comparable& getMax() const;
-    const Comparable& getMin() const;
-
-    int findElement(const Comparable& element) const;
+    const Comparable& findMax() const;
+    const Comparable& findMin() const;
 
     void makeEmpty();
     bool empty() const;

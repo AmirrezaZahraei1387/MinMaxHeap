@@ -61,21 +61,24 @@ int MinMaxHeap<Comparable>::size() const {
 
 
 template<typename Comparable>
-const Comparable &MinMaxHeap<Comparable>::getMin() const {
+const Comparable &MinMaxHeap<Comparable>::findMin() const {
     return getMinElement();
 }
 
 
 template<typename Comparable>
-const Comparable &MinMaxHeap<Comparable>::getMax() const {
+const Comparable &MinMaxHeap<Comparable>::findMax() const {
     return getMaxElement();
 }
 
 
 template<typename Comparable>
 MinMaxHeap<Comparable>::MinMaxHeap(std::initializer_list<Comparable> init_list)
-: mmHeap(init_list), currentSize(init_list.size() - 1)
+:mmHeap(init_list.size()+1) , currentSize(init_list.size())
 {
+    int i{1};
+    for(auto x{init_list.begin()}; x < init_list.end(); ++x, ++i)
+        mmHeap[i] = *x;
     buildHeap();
     expand();
 }
@@ -85,7 +88,6 @@ template<typename Iterator>
 MinMaxHeap<Comparable>::MinMaxHeap(Iterator begin, Iterator end)
 : mmHeap(end - begin + 1), currentSize(end - begin)
 {
-
     int i{1};
     for(auto element{begin}; element < end; ++element, ++i)
         mmHeap[i] = *element;
@@ -99,6 +101,7 @@ void MinMaxHeap<Comparable>::deleteMin() {
     getMinElement() = std::move(mmHeap[currentSize]);
     --currentSize;
     percolateDown(ROOT_IND);
+    reduce();
 }
 
 template<typename Comparable>
@@ -107,6 +110,7 @@ void MinMaxHeap<Comparable>::deleteMin(Comparable &item) {
     getMinElement() = std::move(mmHeap[currentSize]);
     --currentSize;
     percolateDown(ROOT_IND);
+    reduce();
 }
 
 
@@ -115,6 +119,7 @@ void MinMaxHeap<Comparable>::deleteMax() {
     getMaxElement() = std::move(mmHeap[currentSize]);
     --currentSize;
     percolateDown(ROOT_IND);
+    reduce();
 }
 
 
@@ -124,6 +129,7 @@ void MinMaxHeap<Comparable>::deleteMax(Comparable &item) {
     getMaxElement() = std::move(mmHeap[currentSize]);
     --currentSize;
     percolateDown(ROOT_IND);
+    reduce();
 }
 
 
@@ -203,5 +209,6 @@ template<typename Comparable>
 void MinMaxHeap<Comparable>::setPrintType(MinMaxHeap::PrintType pt){
     currentPt = pt;
 }
+
 
 #endif //MINMAXHEAP_MINMAXHEAPTE_INL

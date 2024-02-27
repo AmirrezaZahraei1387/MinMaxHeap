@@ -87,6 +87,8 @@ void MinMaxHeap<Comparable>::percolateDown(int hole) {
     // here to avoid unnecessary swaps.
     mmHeap[TEMP_IND] = std::move(mmHeap[hole]);
 
+    int iho{mmHeap[hole]};
+
     while(hasChild(hole)){
 
         // we are in even level(min level)
@@ -94,18 +96,16 @@ void MinMaxHeap<Comparable>::percolateDown(int hole) {
         {
             // finding the minimum grand child or children of the hole
             int temp {minGCoC(hole)};
-
             // check if the element is greater than it grand children or just
             // children. move since it should not be greater based on the MinMax heap
             // property
             if(mmHeap[temp] < mmHeap[TEMP_IND]) {
                 mmHeap[hole] = std::move(mmHeap[temp]);
-
                 // specifically check if the temp was grand child of hole.
                 // hole can be considered as the place of mmHeap[TEMP_IND]
                 if(isGCoI(temp, hole)) {
                     // now we check the parent.
-                    // if the element than its parent then move since
+                    // if the element is greater than its parent then move since
                     // it violate the property.
                     if (mmHeap[TEMP_IND] > mmHeap[parent(temp)]) {
                         mmHeap[temp] = std::move(mmHeap[parent(temp)]);
@@ -125,6 +125,7 @@ void MinMaxHeap<Comparable>::percolateDown(int hole) {
             // check out the min case since they
             // are symmetric case of each other.
             int temp {maxGCoC(hole)};
+
             if(mmHeap[temp] > mmHeap[TEMP_IND]) {
                 mmHeap[hole] = std::move(mmHeap[temp]);
                 if(isGCoI(temp, hole)) {
@@ -142,15 +143,16 @@ void MinMaxHeap<Comparable>::percolateDown(int hole) {
             }else
                 break;
         }
+
     }
     // the correct position is found
     mmHeap[hole] = std::move(mmHeap[TEMP_IND]);
 }
 
-
 template<typename Comparable>
 void MinMaxHeap<Comparable>::buildHeap() {
-    for(int i{static_cast<int>(mmHeap.size())/2}; i>0; --i) {
+
+    for(int i{1}; i<currentSize; ++i) {
         percolateDown(i);
     }
 }
@@ -167,9 +169,11 @@ void MinMaxHeap<Comparable>::expand() {
 
 template<typename Comparable>
 void MinMaxHeap<Comparable>::reduce() {
+#ifdef REDUCE_MINMAX_HEAP_SIZE
     if(2*currentSize < mmHeap.size()){
         mmHeap.resize(mmHeap.size()/2 + 1);
     }
+#endif
 }
 
 
@@ -281,11 +285,6 @@ bool MinMaxHeap<Comparable>::isGCoI(int hole, int i) const{
         }
 
     return false;
-}
-
-
-template<typename Comparable>
-int MinMaxHeap<Comparable>::findElement(const Comparable& element) const{
 }
 
 
