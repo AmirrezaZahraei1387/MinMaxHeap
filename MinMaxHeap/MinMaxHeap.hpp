@@ -4,8 +4,9 @@
 #ifndef MINMAXHEAP_MINMAXHEAP_HPP
 #define MINMAXHEAP_MINMAXHEAP_HPP
 
-#define REDUCE_MINMAX_HEAP_SIZE
+#include "ConfigDir.hpp"
 
+#include <cstddef>
 #include <ostream>
 #include <initializer_list>
 #include <vector>
@@ -55,14 +56,23 @@ public:
     template<typename T>
     friend std::ostream& operator << (std::ostream& outStream, MinMaxHeap<T>& h);
 
-private:
+#ifdef TEST_IS_MIN_MAX_HEAP
+    // checks if a given minMaxHeap is really a MinMaxHeap or not.
+    // it is used for testing purposes
+    template<typename T>
+    friend bool isMinMaxHeap(const MinMaxHeap<T>& heap, int node);
+    template<typename T>
+    friend bool isMinMaxHeap(const MinMaxHeap<T>& heap);
+#endif
 
+private:
     static constexpr int ROOT_IND{1}; // index of the root
     static constexpr int TEMP_IND{0}; // the first index of the heap.
     // it is used for keeping the element to avoid unnecessary swaps
     static constexpr int DEFAULT_SIZE{10};
+    static constexpr PrintType DEFAULT_PRINT_TYPE{AS_TREE};
 
-    PrintType currentPt{AS_TREE};
+    PrintType currentPt{DEFAULT_PRINT_TYPE};
     int currentSize{0};
     std::vector<Comparable> mmHeap;
 
@@ -81,6 +91,9 @@ private:
     void buildHeap();
     std::ostream& printAsTree(int hole, std::ostream& outStream) const;
     std::ostream& printAsArray(std::ostream& outStream) const;
+
+    // internal method to retrieve data of mmHeap
+    const Comparable& operator[](std::size_t index) const;
 
     // resizing the vector when we need more space, or
     // we do not need some space.

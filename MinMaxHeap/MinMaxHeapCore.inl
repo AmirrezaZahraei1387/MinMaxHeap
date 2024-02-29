@@ -87,7 +87,6 @@ void MinMaxHeap<Comparable>::percolateDown(int hole) {
     // here to avoid unnecessary swaps.
     mmHeap[TEMP_IND] = std::move(mmHeap[hole]);
 
-    int iho{mmHeap[hole]};
 
     while(hasChild(hole)){
 
@@ -294,5 +293,10 @@ std::ostream &MinMaxHeap<Comparable>::printAsArray(std::ostream &outStream) cons
         outStream<<mmHeap[i]<<' ';
     outStream<<std::endl;
     return outStream;
+}
+
+template<typename Comparable>
+const Comparable &MinMaxHeap<Comparable>::operator[](std::size_t index) const {
+    return mmHeap[index];
 }
 #endif //MINMAXHEAP_MINMAXHEAPCORE_INL

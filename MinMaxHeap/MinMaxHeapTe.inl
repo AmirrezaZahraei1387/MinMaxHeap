@@ -210,5 +210,51 @@ void MinMaxHeap<Comparable>::setPrintType(MinMaxHeap::PrintType pt){
     currentPt = pt;
 }
 
+#ifdef TEST_IS_MIN_MAX_HEAP
+template<typename T>
+bool isMinMaxHeap(const MinMaxHeap<T>& heap, int node) {
+
+    using mmh = MinMaxHeap<T>;
+
+
+    while (heap.hasChild(node)) {
+
+        if (mmh::getHeight(node) % 2 == 0) {
+            int temp{heap.minGCoC(node)};
+
+            if (heap[temp] < heap[node])
+                return false;
+
+            if (heap.isGCoI(temp, node))
+                if(heap[node] > heap[mmh::parent(temp)])
+                    return false;
+        }else{
+            int temp{heap.maxGCoC(node)};
+
+            if (heap[temp] > heap[node])
+                return false;
+
+            if (heap.isGCoI(temp, node))
+                if(heap[node] < heap[mmh::parent(temp)])
+                    return false;
+        }
+
+        if(mmh::right(node) <= heap.size())
+            if(!isMinMaxHeap(heap, mmh::right(node)))
+                return false;
+        if(mmh::left(node) <= heap.size())
+            if(!isMinMaxHeap(heap, mmh::left(node)))
+                return false;
+        break;
+    }
+
+    return true;
+}
+template<typename T>
+bool isMinMaxHeap(const MinMaxHeap<T> &heap) {
+    // starting with the root index
+    return isMinMaxHeap(heap, MinMaxHeap<T>::ROOT_IND);
+}
+#endif
 
 #endif //MINMAXHEAP_MINMAXHEAPTE_INL
