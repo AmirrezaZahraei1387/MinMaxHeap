@@ -106,12 +106,8 @@ private:
     int minGCoC(int hole) const;
     int maxGCoC(int hole) const;
 
-    Comparable& getMinElement();
-    Comparable& getMaxElement();
-
-    // internal methods to get a constant reference to the min/max element
-    const Comparable& getMinElement() const;
-    const Comparable& getMaxElement() const;
+    int getMinInd() const;
+    int getMaxInd() const;
 
     static int left(int hole);
     static int right(int hole);
@@ -121,5 +117,6 @@ private:
 
 #include "MinMaxHeapCore.inl"
 #include "MinMaxHeapTe.inl"
+#include "MinMaxHeapMem.inl"
 
 #endif //MINMAXHEAP_MINMAXHEAP_HPP

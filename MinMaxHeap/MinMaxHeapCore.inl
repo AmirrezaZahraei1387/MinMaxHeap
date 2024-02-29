@@ -278,4 +278,24 @@ template<typename Comparable>
 const Comparable &MinMaxHeap<Comparable>::operator[](std::size_t index) const {
     return mmHeap[index];
 }
+
+template<typename Comparable>
+int MinMaxHeap<Comparable>::getMinInd() const{
+    return ROOT_IND;
+}
+
+template<typename Comparable>
+int MinMaxHeap<Comparable>::getMaxInd() const{
+    switch (size()) {
+        case 1:
+            return ROOT_IND;
+        case 2:
+            return left(ROOT_IND);
+        default:
+            return mmHeap[left(ROOT_IND)] > mmHeap[right(ROOT_IND)] ?
+                   left(ROOT_IND) : right(ROOT_IND);
+    }
+}
+
+
 #endif //MINMAXHEAP_MINMAXHEAPCORE_INL

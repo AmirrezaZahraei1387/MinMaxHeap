@@ -12,10 +12,6 @@ int main() {
     b.insert(3);
     b.insert(122);
 
-    std::cout<<b<<std::endl;
-
-#ifdef TEST_IS_MIN_MAX_HEAP
     std::cout<<isMinMaxHeap(b)<<std::endl;
-#endif
     return 0;
 }
