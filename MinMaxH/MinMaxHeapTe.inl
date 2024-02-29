@@ -155,6 +155,20 @@ bool isMinMaxHeap(const MinMaxHeap<T> &heap) {
     // starting with the root index
     return isMinMaxHeap(heap, MinMaxHeap<T>::ROOT_IND);
 }
+
+template<typename Comparable>
+template<typename Iterator>
+void MinMaxHeap<Comparable>::reBuild(Iterator begin, Iterator end) {
+    makeEmpty();
+    currentSize = end - begin;
+    expand();
+
+    int i{1};
+    for(auto element{begin}; element < end; ++element, ++i)
+        mmHeap[i] = *element;
+    buildHeap();
+}
+
 #endif
 
 #endif //MINMAXHEAP_MINMAXHEAPTE_INL

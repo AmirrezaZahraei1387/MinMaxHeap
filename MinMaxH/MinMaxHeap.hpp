@@ -38,6 +38,9 @@ public:
     void insert(const Comparable& item);
     void insert(Comparable&& item);
 
+    template<typename Iterator>
+    void reBuild(Iterator begin, Iterator end);
+
     void setPrintType(PrintType pt);
 
     void deleteMin();
@@ -57,7 +60,7 @@ public:
     friend std::ostream& operator << (std::ostream& outStream, MinMaxHeap<T>& h);
 
 #ifdef TEST_IS_MIN_MAX_HEAP
-    // checks if a given minMaxHeap is really a MinMaxHeap or not.
+    // checks if a given minMaxHeap is really a MinMaxH or not.
     // it is used for testing purposes
     template<typename T>
     friend bool isMinMaxHeap(const MinMaxHeap<T>& heap, int node);

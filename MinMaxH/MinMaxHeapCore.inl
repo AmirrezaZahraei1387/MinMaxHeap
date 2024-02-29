@@ -140,7 +140,7 @@ template<typename Comparable>
 void MinMaxHeap<Comparable>::expand() {
     if(currentSize == 0)
         mmHeap.resize(DEFAULT_SIZE);
-    else if(currentSize + 1 == mmHeap.size())
+    else if(currentSize + 1 >= mmHeap.size())
         mmHeap.resize(2*currentSize + 1);
 }
 
