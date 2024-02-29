@@ -86,7 +86,7 @@ private:
 
     // percolating an element from top to bottom
     // to find its correct position
-    void percolateDown(int hole);
+    void percolateDown(int holeq);
 
     void buildHeap();
     std::ostream& printAsTree(int hole, std::ostream& outStream) const;

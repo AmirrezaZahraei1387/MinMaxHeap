@@ -81,77 +81,47 @@ void MinMaxHeap<Comparable>::percolateUp(int hole) {
  * in the queue.
  */
 template<typename Comparable>
-void MinMaxHeap<Comparable>::percolateDown(int hole) {
+void MinMaxHeap<Comparable>::percolateDown(int holeq) {
 
-    // the element we want to find its correct position is
-    // here to avoid unnecessary swaps.
-    mmHeap[TEMP_IND] = std::move(mmHeap[hole]);
+    while(hasChild(holeq)){
+        int tempq{holeq};
 
+        if(getHeight(tempq) % 2 == 0 ){
+            holeq = minGCoC(tempq);
 
-    while(hasChild(hole)){
+            if(mmHeap[holeq] <mmHeap[tempq]){
+                std::swap(mmHeap[holeq], mmHeap[tempq]);
 
-        // we are in even level(min level)
-        if(getHeight(hole) % 2 == 0)
-        {
-            // finding the minimum grand child or children of the hole
-            int temp {minGCoC(hole)};
-            // check if the element is greater than it grand children or just
-            // children. move since it should not be greater based on the MinMax heap
-            // property
-            if(mmHeap[temp] < mmHeap[TEMP_IND]) {
-                mmHeap[hole] = std::move(mmHeap[temp]);
-                // specifically check if the temp was grand child of hole.
-                // hole can be considered as the place of mmHeap[TEMP_IND]
-                if(isGCoI(temp, hole)) {
-                    // now we check the parent.
-                    // if the element is greater than its parent then move since
-                    // it violate the property.
-                    if (mmHeap[TEMP_IND] > mmHeap[parent(temp)]) {
-                        mmHeap[temp] = std::move(mmHeap[parent(temp)]);
-                        hole = parent(temp);
-                    }else {
-                        hole = temp;
-                        break;
+                if(isGCoI(holeq, tempq)){
+                    if(mmHeap[holeq] > mmHeap[parent(holeq)]){
+                        std::swap(mmHeap[holeq], mmHeap[parent(holeq)]);
                     }
-                }else {
-                    hole = temp;
+                }else
                     break;
-                }
             }else
                 break;
-            // we are in an odd level(max index)
         }else{
-            // check out the min case since they
-            // are symmetric case of each other.
-            int temp {maxGCoC(hole)};
+            holeq = maxGCoC(tempq);
 
-            if(mmHeap[temp] > mmHeap[TEMP_IND]) {
-                mmHeap[hole] = std::move(mmHeap[temp]);
-                if(isGCoI(temp, hole)) {
-                    if (mmHeap[TEMP_IND] < mmHeap[parent(temp)]) {
-                        mmHeap[temp] = std::move(mmHeap[parent(temp)]);
-                        hole = parent(temp);
-                    }else {
-                        hole = temp;
-                        break;
+            if(mmHeap[holeq] > mmHeap[tempq]){
+                std::swap(mmHeap[holeq], mmHeap[tempq]);
+
+                if(isGCoI(holeq, tempq)){
+                    if(mmHeap[holeq] < mmHeap[parent(holeq)]){
+                        std::swap(mmHeap[holeq], mmHeap[parent(holeq)]);
                     }
-                }else {
-                    hole = temp;
+                }else
                     break;
-                }
             }else
                 break;
         }
-
     }
-    // the correct position is found
-    mmHeap[hole] = std::move(mmHeap[TEMP_IND]);
 }
 
 template<typename Comparable>
 void MinMaxHeap<Comparable>::buildHeap() {
 
-    for(int i{1}; i<currentSize; ++i) {
+    for(int i{currentSize/2}; i > 0; i--) {
         percolateDown(i);
     }
 }
