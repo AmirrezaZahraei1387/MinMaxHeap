@@ -9,6 +9,9 @@ int main() {
 
     b.setPrintType(MinMaxHeap<int>::AS_TREE);
 
+    b.insert(3);
+    b.insert(122);
+
     std::cout<<b<<std::endl;
 
 #ifdef TEST_IS_MIN_MAX_HEAP

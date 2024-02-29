@@ -84,14 +84,20 @@ template<typename Comparable>
 void MinMaxHeap<Comparable>::percolateDown(int holeq) {
 
     while(hasChild(holeq)){
+
         int tempq{holeq};
 
+        // min level
         if(getHeight(tempq) % 2 == 0 ){
             holeq = minGCoC(tempq);
 
+            // if the element is bigger than the parent then
+            // we need to swap them because they violate the minMax property
             if(mmHeap[holeq] <mmHeap[tempq]){
                 std::swap(mmHeap[holeq], mmHeap[tempq]);
 
+                // if the holeq we just picked is a specifically grand child of the
+                // tempq then it means the holeq must be less than its parent.
                 if(isGCoI(holeq, tempq)){
                     if(mmHeap[holeq] > mmHeap[parent(holeq)]){
                         std::swap(mmHeap[holeq], mmHeap[parent(holeq)]);
@@ -100,7 +106,10 @@ void MinMaxHeap<Comparable>::percolateDown(int holeq) {
                     break;
             }else
                 break;
+            // max level
         }else{
+
+            // checkout above comments because these are symmetric case of each other
             holeq = maxGCoC(tempq);
 
             if(mmHeap[holeq] > mmHeap[tempq]){
