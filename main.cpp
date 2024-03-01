@@ -37,7 +37,14 @@ bool getCommand(std::string& command, std::string& args){
         return true;
     }else if(command == "findMax"){
         return true;
-    }else if(command == "check"){
+
+    }else if(
+#ifdef TEST_IS_MIN_MAX_HEAP
+    command == "check"
+#else
+    false
+#endif
+    ){
         return true;
     }else if(command == "print") {
         return true;
@@ -76,8 +83,16 @@ void processCommand(MinMaxHeap<APP_TYPE>& mmh, const std::string& command, const
         std::cout<<mmh.findMin()<<std::endl;
     }else if(command == "findMax"){
         std::cout<<mmh.findMax()<<std::endl;
-    }else if(command == "check"){
+    }else if(
+#ifdef TEST_IS_MIN_MAX_HEAP
+command == "check"
+#else
+        false
+#endif
+            ){
+#ifdef TEST_IS_MIN_MAX_HEAP
         std::cout<<isMinMaxHeap(mmh)<<std::endl;
+#endif
     }else if(command == "print"){
         std::cout<<mmh<<std::endl;
     }else if(command == "getSize"){
