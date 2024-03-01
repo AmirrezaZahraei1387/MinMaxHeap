@@ -150,11 +150,14 @@ bool isMinMaxHeap(const MinMaxHeap<T>& heap, int node) {
 
     return true;
 }
+
+
 template<typename T>
 bool isMinMaxHeap(const MinMaxHeap<T> &heap) {
     // starting with the root index
     return isMinMaxHeap(heap, MinMaxHeap<T>::ROOT_IND);
 }
+#endif
 
 template<typename Comparable>
 template<typename Iterator>
@@ -168,7 +171,5 @@ void MinMaxHeap<Comparable>::reBuild(Iterator begin, Iterator end) {
         mmHeap[i] = *element;
     buildHeap();
 }
-
-#endif
 
 #endif //MINMAXHEAP_MINMAXHEAPTE_INL
