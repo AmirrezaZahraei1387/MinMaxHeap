@@ -3,7 +3,7 @@ CXX = g++
 
 OBJ = main.o
 EXE_NAME = demo
-HEADERS = MinMaxH/MinMaxHeap.hpp MinMaxH/MinMaxHeapCore.inl MinMaxH/MinMaxHeapMem.inl MinMaxH/MinMaxHeapTe.inl
+HEADERS = MinMaxH/include/MinMaxHeap.hpp MinMaxH/MinMaxHeapCore.inl MinMaxH/MinMaxHeapMem.inl MinMaxH/MinMaxHeapTe.inl
 CONFIG_H = MinMaxH/ConfigDir.hpp
 
 

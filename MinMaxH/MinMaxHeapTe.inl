@@ -3,7 +3,7 @@
 //
 #ifndef MINMAXHEAP_MINMAXHEAPTE_INL
 #define MINMAXHEAP_MINMAXHEAPTE_INL
-#include "MinMaxHeap.hpp"
+#include "include/MinMaxHeap.hpp"
 
 template<typename Comparable>
 void MinMaxHeap<Comparable>::insert(const Comparable &item) {

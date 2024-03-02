@@ -4,7 +4,7 @@
 #ifndef MINMAXHEAP_MINMAXHEAPMEM_INL
 #define MINMAXHEAP_MINMAXHEAPMEM_INL
 
-#include "MinMaxHeap.hpp"
+#include "include/MinMaxHeap.hpp"
 
 template<typename Comparable>
 MinMaxHeap<Comparable>::MinMaxHeap()

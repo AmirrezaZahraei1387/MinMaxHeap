@@ -1,6 +1,6 @@
 #include <iostream>
 #include <vector>
-#include "MinMaxH/MinMaxHeap.hpp"
+#include "MinMaxH/include/MinMaxHeap.hpp"
 
 using APP_TYPE = int;
 

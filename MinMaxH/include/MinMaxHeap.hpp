@@ -4,7 +4,7 @@
 #ifndef MINMAXHEAP_MINMAXHEAP_HPP
 #define MINMAXHEAP_MINMAXHEAP_HPP
 
-#include "ConfigDir.hpp"
+#include "../ConfigDir.hpp"
 
 #include <cstddef>
 #include <ostream>
@@ -118,8 +118,8 @@ private:
 
 };
 
-#include "MinMaxHeapCore.inl"
-#include "MinMaxHeapTe.inl"
-#include "MinMaxHeapMem.inl"
+#include "../MinMaxHeapCore.inl"
+#include "../MinMaxHeapTe.inl"
+#include "../MinMaxHeapMem.inl"
 
 #endif //MINMAXHEAP_MINMAXHEAP_HPP

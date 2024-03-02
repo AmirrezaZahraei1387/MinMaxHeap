@@ -7,7 +7,7 @@
 
 #include <memory>
 #include <cmath>
-#include "MinMaxHeap.hpp"
+#include "include/MinMaxHeap.hpp"
 
 
 template<typename Comparable>

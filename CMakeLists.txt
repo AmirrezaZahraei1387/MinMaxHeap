@@ -11,5 +11,5 @@ target_link_libraries(MinMaxHeap PUBLIC MinMaxHeapLib)
 
 target_include_directories(MinMaxHeap PUBLIC
         "${PROJECT_BINARY_DIR}"
-        "${PROJECT_SOURCE_DIR}/MinMaxH"
+        "${PROJECT_SOURCE_DIR}/MinMaxH/include"
         )

@@ -2,7 +2,7 @@
 add_library(
         MinMaxHeapLib
         ConfigDir.hpp
-        MinMaxHeap.hpp
+        include/MinMaxHeap.hpp
         MinMaxHeapTe.inl
         MinMaxHeapMem.inl
         MinMaxHeapCore.inl
